@@ -30,10 +30,10 @@ enloqueceSegunItem :: Investigador -> Item -> Investigador
 enloqueceSegunItem investigador item = investigador {cordura= cordura (enloquece investigador (valor item)), items = item : items investigador }
     --Quiero incorporar un item a la lista de items, se me ocurre un map, tal vez no es lo mas eficiente, mal, es agregarle el elemento nuevo como cabeza con (:)
 -----------------------------------
---2)
+--2)Dado un nombre de item y un grupo de investigadores, saber si alguno de ellos tiene un item con el nombre indicado
 
---tieneItemConNombreIndicado :: Item -> [Investigador] -> Bool
---tieneItemConNombreIndicado item investigadores = (tieneEseItem item ). (filter items investigadores)
+tieneItemConNombreIndicado :: Item -> [Investigador] -> Bool
+tieneItemConNombreIndicado item investigadores =  any (tieneEseItem item) investigadores --Muy bien capo
 
 
 
@@ -42,9 +42,9 @@ enloqueceSegunItem investigador item = investigador {cordura= cordura (enloquece
 
 
 
---Toma la lista de items de un investigador
+--Toma la lista de items de un investigador (item con nombre indicado)
 tieneEseItem :: Item -> Investigador -> Bool
-tieneEseItem item investigador = elem item (items investigador)
+tieneEseItem item investigador = elem item (items investigador) 
 
 itemsDePrueba1 =[Item "perros" 5, Item "gatos" 6]
 itemsDePrueba2 =[Item "mandril" 12, Item "conejo" 8]
@@ -71,8 +71,7 @@ investigador3= Investigador {
     items = itemsDePrueba3,
     sucesosEvitados =[]
 }
-perro = Item "perros" 6
+perro = Item "perros" 5
 
 investigadore =[investigador1, investigador2, investigador3]
 
---Chris, filter analiza si se cumple
